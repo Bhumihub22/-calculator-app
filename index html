@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เครื่องคิดเลขพื้นฐาน</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 300px;
+        }
+        #display {
+            width: 100%;
+            height: 60px;
+            background-color: #2b2b2b;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: right;
+            padding: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            pointer-events: none;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #333333;
+            color: #ffffff;
+            transition: background-color 0.2s;
+        }
+        button:active {
+            background-color: #555555;
+        }
+        .operator {
+            background-color: #ff9f0a;
+            color: white;
+        }
+        .operator:active {
+            background-color: #ffb340;
+        }
+        .span-2 {
+            grid-column: span 2;
+        }
+        .clear {
+            background-color: #ff453a;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" value="0" readonly>
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="appendCharacter('/')" class="operator">÷</button>
+        <button onclick="appendCharacter('*')" class="operator">×</button>
+        <button onclick="deleteLast()" class="operator">⌫</button>
+        
+        <button onclick="appendCharacter('7')">7</button>
+        <button onclick="appendCharacter('8')">8</button>
+        <button onclick="appendCharacter('9')">9</button>
+        <button onclick="appendCharacter('-')" class="operator">-</button>
+        
+        <button onclick="appendCharacter('4')">4</button>
+        <button onclick="appendCharacter('5')">5</button>
+        <button onclick="appendCharacter('6')">6</button>
+        <button onclick="appendCharacter('+')" class="operator">+</button>
+        
+        <button onclick="appendCharacter('1')">1</button>
+        <button onclick="appendCharacter('2')">2</button>
+        <button onclick="appendCharacter('3')">3</button>
+        <button onclick="calculate()" class="operator span-2" style="grid-row: span 2; height: 100%;">=</button>
+        
+        <button onclick="appendCharacter('0')" class="span-2">0</button>
+        <button onclick="appendCharacter('.')">.</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function appendCharacter(char) {
+        if (display.value === '0' && char !== '.') {
+            display.value = char;
+        } else {
+            display.value += char;
+        }
+    }
+
+    function clearDisplay() {
+        display.value = '0';
+    }
+
+    function deleteLast() {
+        display.value = display.value.slice(0, -1);
+        if (display.value === '') {
+            display.value = '0';
+        }
+    }
+
+    function calculate() {
+        try {
+            // แทนที่เครื่องหมายเพื่อความถูกต้องในการคำนวณทาง JavaScript
+            let expression = display.value.replace(/×/g, '*').replace(/÷/g, '/');
+            display.value = eval(expression);
+        } catch (error) {
+            display.value = 'Error';
+            setTimeout(clearDisplay, 1500);
+        }
+    }
+</script>
+
+</body>
+</html>
