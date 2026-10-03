@@ -1,0 +1,15 @@
+{
+  "name": "เครื่องคิดเลขพื้นฐาน",
+  "short_name": "เครื่องคิดเลข",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#1e1e1e",
+  "icons": [
+    {
+      "src": "https://cdn.iconscout.com/icon/premium/png-512-thumb/calculator-1911979-1616422.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
